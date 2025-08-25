@@ -38,14 +38,16 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
       aria-label="Toggle theme"
+      className="p-2 rounded-md bg-transparent border-none transition-colors duration-200 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary group"
     >
-      {isDark ? (
-        <FiSun className="w-5 h-5 text-yellow-400" />
-      ) : (
-        <FiMoon className="w-5 h-5 text-white-700" />
-      )}
+      <span className="flex items-center justify-center transition-transform duration-300 group-active:rotate-180">
+        {isDark ? (
+          <FiSun className="w-5 h-5 text-yellow-400 transition-colors duration-200" />
+        ) : (
+          <FiMoon className="w-5 h-5 text-indigo-600 dark:text-indigo-300 transition-colors duration-200" />
+        )}
+      </span>
     </button>
   );
 }

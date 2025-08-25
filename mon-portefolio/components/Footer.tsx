@@ -14,10 +14,11 @@ export function Footer() {
   ];
 
   const footerNavLinks = [
-    { href: "/about", label: "À propos" },
-    { href: "/services", label: "Services" },
-    { href: "/contact", label: "Contact" },
-    { href: "/legal", label: "Mentions Légales" }, // Example
+    { href: "#hero", label: "Accueil" },
+    { href: "#a-propos", label: "À propos" },
+    { href: "#projets", label: "Projets" },
+    { href: "#contact", label: "Contact" },
+    { href: "/legal", label: "Mentions Légales" },
   ];
 
   return (

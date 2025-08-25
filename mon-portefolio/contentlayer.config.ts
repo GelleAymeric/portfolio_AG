@@ -1,3 +1,26 @@
+export const Project = defineDocumentType(() => ({
+  name: 'Project',
+  filePathPattern: `projects/**/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    description: { type: 'string', required: true },
+    image: { type: 'string', required: false },
+    github: { type: 'string', required: false },
+    demo: { type: 'string', required: false },
+  },
+  computedFields: {
+    slug: {
+      type: 'string',
+      resolve: (doc) => doc._raw.flattenedPath.replace('projects/', ''),
+    },
+    url: {
+      type: 'string',
+      resolve: (project) => `/projects/${project._raw.flattenedPath.replace('projects/', '')}`,
+    },
+  },
+}))
 // contentlayer.config.ts
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import remarkGfm from 'remark-gfm'
@@ -27,8 +50,8 @@ export const Post = defineDocumentType(() => ({
 }))
 
 export default makeSource({
-  contentDirPath: 'content', // Le contenu sera dans le dossier "content"
-  documentTypes: [Post],
+  contentDirPath: 'content',
+  documentTypes: [Post, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
@@ -37,7 +60,7 @@ export default makeSource({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         rehypePrettyCode as any,
         {
-          theme: 'github-dark', // Thème pour la coloration syntaxique
+          theme: 'github-dark',
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onVisitLine(node: any) {
             // Empêche l'ajout de numéros de ligne vides
